@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'index.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    <form method="POST" action="/login" class="container-fluid row justify-content-center">
+      <div class="col-5">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control mb-3" id="email" name="email" required><br>
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control mb-3" id="password" name="password" required><br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+</form>
+{%endblock%}

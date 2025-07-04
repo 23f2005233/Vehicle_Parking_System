@@ -1,0 +1,56 @@
+{% block navbar %}
+<!-- Navbar template for the Vehicle Parking System -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <!-- LOGO & NAME -->
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+          Vehicle Parking System
+        </a>
+      </div>
+    </nav>
+    <!-- RESPONSIVE DESIGN -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="#">Home</a>
+      </li>
+      {% if 'email' in session %}
+        {% if 'Admin' in session.get('roles', []) %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">Users</a>
+          </li>
+          <!-- <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form> -->
+          <li class="nav-item">
+            <a class="nav-link" href="#">Search</a>
+          </li>
+        {%endif%}
+        <li class="nav-item">
+          <a class="nav-link" href="#">Summary</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">My Profile</a>
+        </li>
+      {% else %}
+        <a class="nav-link" href="{{url_for('register')}}">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('login')}}">Login</a>
+      </li>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+{% endblock %}

@@ -20,7 +20,7 @@ def create_tables():
     if not User.query.first():
         # Create a default admin user if no users exist
         admin_user = User(
-            email = 'admin',
+            email = 'admin@vps',
             password = 'let me in, I am the admin',
             fullname = 'Admin User',
             address = '123 Admin Street',
