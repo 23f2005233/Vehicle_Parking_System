@@ -1,0 +1,24 @@
+# Byte-compiled / cache files
+__pycache__/
+controller/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.Python
+
+# VSCode settings (if used)
+.vscode/
+
+# Flask instance folder (if using `app.config.from_pyfile('config.py')`)
+instance/
+
+# Pytest cache
+.cache/
+
+
