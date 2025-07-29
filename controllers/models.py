@@ -29,14 +29,19 @@ class ParkingLot(db.Model):
 class ParkingSpot(db.Model):
     ps_id = db.Column(db.Integer, primary_key=True)
     pl_id = db.Column(db.Integer, db.ForeignKey('parking_lot.pl_id'), nullable=False)
-    spot_number = db.Column(db.String(10), nullable=False)
-    status = db.Column(db.String(1), default=False)
+    spot_number = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.String(1), nullable=False, default='A')   # O for Occupied, R for Reserved, A for Available
     vehicle_number = db.Column(db.String(15), nullable=True, default=None)
+    parking_lot = db.relationship('ParkingLot', backref='parking_spot')
 
 class Reserve(db.Model):
     r_id = db.Column(db.Integer, primary_key=True)
     u_id = db.Column(db.Integer, db.ForeignKey('user.u_id'), nullable=False)
-    ps_id = db.Column(db.Integer, db.ForeignKey('parking_spot.ps_id'), nullable=False)
+    ps_id = db.Column(db.Integer, nullable=False)
+    pl_id = db.Column(db.Integer, nullable=False)
     start_time = db.Column(db.DateTime, nullable=False)
-    end_time = db.Column(db.DateTime, nullable=False)
+    end_time = db.Column(db.DateTime, nullable=True, default=None)
     payment = db.Column(db.Float, nullable=False, default=0.0)
+    released = db.Column(db.Boolean, default=False)
+    vehicle_number = db.Column(db.String(15), nullable=True, default=None)
+    user = db.relationship('User', backref='reservations')

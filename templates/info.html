@@ -1,0 +1,82 @@
+{% extends 'index.html' %}
+{% block title %}Welcome to Smart Parking{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+  <!-- HERO SECTION -->
+  <div class="text-center mb-5">
+    <h1 class="fw-bold">Smart. Simple. Secure Parking.</h1>
+    <p class="lead">Reserve your parking spot in seconds — no hassle, no queues.</p>
+    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-2">Get Started</a>
+    <a href="{{ url_for('login') }}" class="btn btn-outline-secondary btn-lg">Login</a>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <div class="mb-5">
+    <h3>About the Vehicle Parking System</h3>
+    <p>
+      Our system offers a seamless way to find, reserve, and manage parking spots in real-time. Whether you're an admin managing lots or a user looking for a free spot — we've got you covered.
+    </p>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="mb-5">
+    <h3>How It Works</h3>
+    <ol class="list-group list-group-numbered">
+      <li class="list-group-item">Register or Login to your account</li>
+      <li class="list-group-item">View available parking lots</li>
+      <li class="list-group-item">Reserve the first available spot</li>
+      <li class="list-group-item">Park your vehicle and release once done</li>
+      <li class="list-group-item">Track your usage history and payments</li>
+    </ol>
+  </div>
+
+  <!-- FEATURES SECTION -->
+  <div class="mb-5">
+    <h3>Key Features</h3>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">🔐 Role-based dashboards for Admins and Users</li>
+      <li class="list-group-item">📊 Real-time parking spot status</li>
+      <li class="list-group-item">💸 Auto cost calculation based on duration</li>
+      <li class="list-group-item">📁 Full reservation history and payment summary</li>
+    </ul>
+  </div>
+
+  <!-- LOCATIONS COVERED -->
+  <div class="mb-5">
+    <h3>📍 Locations Covered</h3>
+    {% if parking_lots_locations %}
+      <div class="row">
+        {% for location in parking_lots_locations %}
+          <div class="col-md-3 mb-3">
+            <div class="card shadow-sm text-center p-3">
+              <strong>{{ location }}</strong>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-muted">No parking locations available yet.</p>
+    {% endif %}
+  </div>
+
+  <!-- WHY REGISTER -->
+  <div class="mb-5">
+    <h3>Why Register?</h3>
+    <ul class="list-unstyled">
+      <li>✔ Fast and easy parking reservations</li>
+      <li>✔ Access to real-time spot availability</li>
+      <li>✔ Secure profile and reservation tracking</li>
+      <li>✔ View your entire parking history at one place</li>
+    </ul>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="text-center mt-4">
+    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">Register Now</a>
+    <p class="mt-2">Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'home.html' %}
+{% block title %}Reservation Details{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center bg-light" style="min-height: 100vh;">
+  <div class="card shadow-lg p-5 bg-white" style="width: 500px; border-radius: 1rem;">
+    <h4 class="text-center mb-4 fw-semibold text-primary">Reservation Details</h4>
+
+    <form>
+      <div class="mb-3 row">
+        <label class="col-sm-5 col-form-label fw-medium text-secondary">Spot Number</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control-plaintext" readonly value="{{ spot.spot_number }}">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-5 col-form-label fw-medium text-secondary">User ID</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control-plaintext" readonly value="{{ user.u_id }}">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-5 col-form-label fw-medium text-secondary">Username</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control-plaintext" readonly value="{{ user.fullname }}">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-5 col-form-label fw-medium text-secondary">Vehicle Number</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control-plaintext" readonly value="{{ reservation.vehicle_number }}">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-5 col-form-label fw-medium text-secondary">Start Time</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control-plaintext" readonly value="{{ reservation.start_time.strftime('%d-%b-%Y %I:%M %p') }}">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-5 col-form-label fw-medium text-secondary">Est. Parking Cost</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control-plaintext text-success fw-bold" readonly value="₹ {{ estimated_cost(reservation.start_time, lot.price) }}">
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="{{ url_for('home') }}" class="btn btn-outline-secondary px-4">Close</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

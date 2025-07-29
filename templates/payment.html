@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+{% block title %}Payment Page{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="mx-auto shadow rounded-4 p-5 bg-white" style="max-width: 500px;">
+
+    <h2 class="text-center fw-semibold mb-4">Payment Summary</h2>
+
+    <div class="mb-4">
+      <p class="mb-2"><strong>Parking Lot:</strong> {{ lot.prime_location_name if lot else 'N/A' }}</p>
+      <p class="mb-2"><strong>Spot Number:</strong> {{ spot.ps_id }}</p>
+      <p class="mb-2"><strong>Duration Parked:</strong> {{ duration|round(2) }} hours</p>
+      <p class="mb-2"><strong>Rate per Hour:</strong> ₹{{ lot.price if lot else 'N/A' }}</p>
+      <hr>
+      <p class="fs-5 fw-bold text-primary mt-3">Total Payment: ₹{{ total }}</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('release', spot_id=spot.ps_id) }}">
+      <button type="submit" class="btn btn-success w-100 py-2 fw-semibold">Finish</button>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

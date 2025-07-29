@@ -1,13 +1,11 @@
 {% extends 'index.html' %}
 {% block title %}Home{% endblock %}
 {% block content %}
-    <div class="container-fluid">
-        {% if 'Admin' in session.get('roles', []) %}
-            {%include 'admin_page.html' %}
-        {% elif 'User' in session.get('roles', []) %}
-            {%include 'user_page.html' %}
-        {% else %}
-            {%include 'info.html' %}
-        {% endif %}
-    </div>
+    {% if 'Admin' in session.get('roles', '') %}
+        {% include 'admin_dashboard.html' %}
+    {% elif 'User' in session.get('roles', '') %}
+        {% include 'user_dashboard.html' %}
+    {% else %}
+        {% include 'info.html' %}
+    {% endif %}
 {% endblock %}

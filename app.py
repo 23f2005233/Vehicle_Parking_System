@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request
-from flask_sqlalchemy import SQLAlchemy
 from controllers.database import db
 from controllers.create_database_instances import create_tables
-from controllers.config import config
 
 def create_app():
     app = Flask(__name__, template_folder='templates')

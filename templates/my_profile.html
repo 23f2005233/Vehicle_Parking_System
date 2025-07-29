@@ -1,0 +1,42 @@
+{% extends 'index.html'%}
+{% block title %}My Profile{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+  <div class="card shadow-lg border-0 rounded-4 mx-auto" style="max-width: 600px;">
+    <div class="card-header bg-primary text-white text-center rounded-top-4">
+      <h4 class="mb-0">{{ user.fullname }}</h4>
+    </div>
+
+    <div class="card-body px-4 py-4">
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-secondary">Email</label>
+        <div class="form-control bg-light">{{ user.email }}</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-secondary">Address</label>
+        <div class="form-control bg-light">{{ user.address }}</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-secondary">Pincode</label>
+        <div class="form-control bg-light">{{ user.pincode }}</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-secondary">Phone Number</label>
+        <div class="form-control bg-light">{{ user.phno }}</div>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="{{ url_for('edit_profile', user_id=user.u_id) }}" class="btn btn-outline-primary px-4">
+          Edit Profile
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+

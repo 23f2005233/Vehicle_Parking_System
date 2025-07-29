@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+{% block title %}Reserve Spot{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center bg-light" style="min-height: 100vh;">
+  <div class="card shadow-lg p-5 bg-white" style="width: 100%; max-width: 550px; border-radius: 1rem;">
+    <h4 class="text-center text-primary mb-4 fw-semibold">Reserve Parking Spot</h4>
+
+    <form class="needs-validation" method="POST" action="{{ url_for('reserve', lot_id=lot_id) }}">
+
+      <div class="mb-3">
+        <label for="ps_id" class="form-label">Parking Spot ID</label>
+        <input class="form-control" type="text" value="{{ ps.ps_id }}" name="ps_id" disabled>
+      </div>
+
+      <div class="mb-3">
+        <label for="spot_number" class="form-label">Spot Number</label>
+        <input class="form-control" type="text" value="{{ ps.spot_number }}" name="spot_number" disabled>
+      </div>
+
+      <div class="mb-3">
+        <label for="pl_id" class="form-label">Parking Lot ID</label>
+        <input class="form-control" type="text" value="{{ lot_id }}" name="pl_id" disabled>
+      </div>
+
+      <div class="mb-3">
+        <label for="user_email" class="form-label">User (Email)</label>
+        <input class="form-control" type="text" value="{{ session.get('email') }}" disabled>
+      </div>
+
+      <!-- Hidden fields for backend -->
+      <input type="hidden" name="ps_id" value="{{ ps.ps_id }}">
+      <input type="hidden" name="start_time" value="{{ start_time.isoformat() }}">
+
+      <div class="mb-4">
+        <label for="vehicle_number" class="form-label">Vehicle Number</label>
+        <input class="form-control" type="text" name="vehicle_number" placeholder="Enter your vehicle number" required>
+      </div>
+
+      <div class="d-grid">
+        <button class="btn btn-primary fw-semibold" type="submit">Reserve</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

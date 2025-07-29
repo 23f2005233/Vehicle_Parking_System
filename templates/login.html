@@ -1,13 +1,32 @@
 {% extends 'index.html' %}
 {% block title %}Login{% endblock %}
+
 {% block content %}
-    <form method="POST" action="/login" class="container-fluid row justify-content-center">
-      <div class="col-5">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control mb-3" id="email" name="email" required><br>
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control mb-3" id="password" name="password" required><br>
-          <button type="submit" class="btn btn-primary">Submit</button>
+<div class="d-flex justify-content-center mt-5 mb-3">
+  <div class="border rounded-4 shadow-sm p-5 bg-white" style="width: 100%; max-width: 400px;">
+
+    <h2 class="text-center mb-4 fw-semibold">Login</h2>
+
+    <form method="POST" action="/login" novalidate>
+      <div class="mb-3">
+        <label for="email" class="form-label fw-medium">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
       </div>
-</form>
-{%endblock%}
+
+      <div class="mb-4">
+        <label for="password" class="form-label fw-medium">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary btn-lg">Login</button>
+      </div>
+    </form>
+
+    <p class="mt-4 text-center small text-muted">
+      Don't have an account? <a href="/register">Register</a>
+    </p>
+
+  </div>
+</div>
+{% endblock %}

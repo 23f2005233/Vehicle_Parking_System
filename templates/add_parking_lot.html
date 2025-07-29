@@ -1,0 +1,38 @@
+<div class="offcanvas offcanvas-start shadow" data-bs-backdrop="static" tabindex="-1" id="add_lot" aria-labelledby="staticBackdropLabel">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title fw-semibold" id="staticBackdropLabel">Add Parking Lot</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form class="p-3" method="POST" action="{{ url_for('add_parking_lot') }}">
+      <div class="mb-3">
+        <label for="prime_location_name" class="form-label fw-medium">Prime Location Name</label>
+        <input type="text" class="form-control" id="prime_location_name" name="prime_location_name" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label fw-medium">Price</label>
+        <input type="number" class="form-control" id="price" name="price" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="address" class="form-label fw-medium">Address</label>
+        <input type="text" class="form-control" id="address" name="address" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="pincode" class="form-label fw-medium">Pincode</label>
+        <input type="text" class="form-control" id="pincode" name="pincode" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="max_spots" class="form-label fw-medium">Maximum Spots</label>
+        <input type="number" class="form-control" id="max_spots" name="max_spots" required>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary btn-lg">Add Parking Lot</button>
+      </div>
+    </form>
+  </div>
+</div>

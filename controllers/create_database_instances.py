@@ -21,7 +21,7 @@ def create_tables():
         # Create a default admin user if no users exist
         admin_user = User(
             email = 'admin@vps',
-            password = 'let me in, I am the admin',
+            password = 'let me in',
             fullname = 'Admin User',
             address = '123 Admin Street',
             pincode = '123456',
@@ -29,5 +29,4 @@ def create_tables():
             role = [Admin_role]  # Assign the admin role to this user
         )
         db.session.add(admin_user)
-        db.session.commit()
-    
+        db.session.commit() 
