@@ -1,0 +1,117 @@
+{% extends 'index.html' %}
+{% block title %}My Parking Summary{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+  <!-- 1. Summary Metrics -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-4">
+      <div class="card text-center shadow-sm rounded-4 p-4">
+        <h5 class="fw-medium text-secondary">Total Reservations</h5>
+        <p class="display-6 fw-bold">{{ total_usage }}</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center shadow-sm rounded-4 p-4">
+        <h5 class="fw-medium text-secondary">Total Hours Parked</h5>
+        <p class="display-6 fw-bold">{{ "%.2f"|format(total_duration) }} hrs</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center shadow-sm rounded-4 p-4">
+        <h5 class="fw-medium text-secondary">Total Cost</h5>
+        <p class="display-6 fw-bold text-success">₹{{ "%.2f"|format(total_cost) }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Active Reservation -->
+  {% if active_reservation %}
+  <div class="card mb-5 shadow-sm rounded-4">
+    <div class="card-header bg-primary text-white rounded-top-4">
+      <h6 class="mb-0">Current Reservation</h6>
+    </div>
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-md-3"><strong>Lot #</strong><br>{{ active_reservation.pl_id }}</div>
+        <div class="col-md-3"><strong>Spot #</strong><br>{{ active_reservation.ps_id }}</div>
+        <div class="col-md-3"><strong>Start Time</strong><br>{{ active_reservation.start_time.strftime('%d %b %Y, %I:%M %p') }}</div>
+        <div class="col-md-3"><strong>Elapsed</strong><br>{{ ((now - active_reservation.start_time).total_seconds() / 3600)|round(2) }} hrs</div>
+      </div>
+      <div class="mt-4 text-end">
+        <a href="{{ url_for('release', spot_id=active_reservation.ps_id) }}" class="btn btn-outline-danger">Release Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Monthly Reservations Chart -->
+  <div class="card shadow-sm rounded-4 mb-4">
+    <div class="card-header bg-light rounded-top-4">
+      <h5 class="mb-0">Monthly Reservations</h5>
+    </div>
+    <div class="card-body text-center">
+      <img src="data:image/png;base64,{{ user_monthly_res_chart }}" class="img-fluid">
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- 4. Reservation History Table -->
+  <div class="card shadow-sm rounded-4">
+    <div class="card-header bg-light rounded-top-4">
+      <h5 class="mb-0">Reservation History</h5>
+    </div>
+    <div class="card-body p-0">
+      {% if reservations %}
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr class="text-center">
+              <th>Lot #</th>
+              <th>Spot #</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Duration (hrs)</th>
+              <th>Cost (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in reservations %}
+            <tr class="text-center">
+              <td>{{ r.pl_id }}</td>
+              <td>{{ r.ps_id }}</td>
+              <td>{{ r.start_time.strftime('%d %b %Y, %I:%M %p') }}</td>
+              <td>
+                {% if r.end_time %}
+                  {{ r.end_time.strftime('%d %b %Y, %I:%M %p') }}
+                {% else %}
+                  <span class="text-muted">Ongoing</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if r.end_time %}
+                  {{ ((r.end_time - r.start_time).total_seconds() / 3600)|round(2) }}
+                {% else %}
+                  —
+                {% endif %}
+              </td>
+              <td>
+                {% if r.end_time %}
+                  {{ "%.2f"|format(r.payment) }}
+                {% else %}
+                  —
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+        <p class="text-center text-muted py-4 mb-0">No past reservations found.</p>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% block title %}Admin Summary{% endblock %}
+
+{% block content %}
+<div class="container mt-4 pt-3">
+    <h2>Admin Summary Dashboard</h2>
+    <div class="row mt-4">
+        <div class="col-md-4"><strong>Total Users:</strong> {{ total_users }}</div>
+        <div class="col-md-4"><strong>Total Spots:</strong> {{ total_spots }}</div>
+        <div class="col-md-4"><strong>Total Reservations:</strong> {{ total_reservations }}</div>
+        <div class="col-md-4 mt-2"><strong>Active Reservations:</strong> {{ active_reservations }}</div>
+        <div class="col-md-4 mt-2"><strong>Average Duration:</strong> {{ avg_duration }} hrs</div>
+        <div class="col-md-4 mt-2"><strong>Total Revenue:</strong> ₹{{ total_revenue }}</div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Parking Spot Usage</h5>
+            <img src="data:image/png;base64,{{ spot_usage_chart }}" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h5>User Reservation Frequency</h5>
+            <img src="data:image/png;base64,{{ user_res_chart }}" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h5>Monthly Revenue</h5>
+            <img src="data:image/png;base64,{{ monthly_revenue_chart }}" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h5>Monthly Reservations</h5>
+            <img src="data:image/png;base64,{{ monthly_res_chart }}" class="img-fluid">
+        </div>
+    </div>
+</div>
+{% endblock %}

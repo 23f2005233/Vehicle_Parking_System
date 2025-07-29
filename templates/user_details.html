@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% block title %}User Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4">User: {{ user.fullname }}</h2>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Total Reservations:</strong> {{ total_usage }}</p>
+    <p><strong>Total Hours Used:</strong> {{ "%.2f"|format(total_duration) }} hours</p>
+
+    <h4 class="mt-4">Reservation History</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Spot Number</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Duration (hrs)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for res in reservations %}
+            <tr>
+                <td>{{ res.ps_id }}</td>
+                <td>{{ res.start_time }}</td>
+                <td>{{ res.end_time }}</td>
+                <td>
+                    {% if res.end_time and res.start_time %}
+                        {{ ((res.end_time - res.start_time).total_seconds() / 3600)|round(2) }}
+                    {% else %}
+                        Ongoing
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
